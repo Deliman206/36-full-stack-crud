@@ -8,9 +8,9 @@ export default function autoBind(classComponent) {
   });
 }
 
-export const validateTodo = (payload) => {
+export const validateLibrary = (payload) => {
   if (!payload._id) {
-    throw new Error('VALIDATION_ERROR: todo must have an id');
+    throw new Error('VALIDATION_ERROR: library must have an id');
   }
-  if (!payload.title) throw new Error('VALIDATION_ERROR: todo must have a title');
+  if (!payload.name) throw new Error('VALIDATION_ERROR: library must have a name');
 };

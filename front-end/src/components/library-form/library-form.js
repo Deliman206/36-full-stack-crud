@@ -3,33 +3,36 @@ import PropTypes from 'prop-types';
 import autoBind from './../../utils';
 
 const defaultState = {
-  title: '',
+  name: '',
   error: null,
 };
 
-export default class TodoForm extends React.Component {
+export default class LibraryForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props.todo || defaultState;
-    autoBind.call(this, TodoForm);
+    this.state = this.props.library || defaultState;
+    autoBind.call(this, LibraryForm);
   }
 
   componentDidUpdate(previousProps) {
-    if (previousProps.todo !== this.props.todo) {
-      this.setState(this.props.todo);
+    if (previousProps.library !== this.props.library) {
+      this.setState(this.props.library);
     }
   }
 
   handleChange(event) {
     event.preventDefault();
+    const { libraryId } = this.props;
     const { value } = event.target;
-    this.setState({ title: value });   
+    this.setState({ name: value }); 
+    if (libraryId) this.setState({ _id: libraryId });  
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const { onComplete } = this.props;
     const result = onComplete(this.state);
+    this.setState(defaultState);
 
     if (result instanceof Promise) {
       result
@@ -37,34 +40,39 @@ export default class TodoForm extends React.Component {
           this.setState(defaultState);
         })
         .catch((error) => {
-          console.error('error', error);
+          console.error('error', error); // eslint-disable-line
           this.setState({ error });
         });
     }
   }
 
   render() {
-    const buttonText = this.props.todo ? 'Update' : 'Create';
+    const { buttonText } = this.props;
     return (
       <form
         onSubmit={this.handleSubmit}
-        className='todo-form'>
+        className='library-form'>
 
         <input
           type='text'
           name='title'
-          placeholder='What todo?'
+          placeholder='+ Library'
           value={this.state.title}
           onChange={this.handleChange}
         />
-        <button type='submit'>{buttonText} todo</button>
-
+        {
+          this.props.buttonText === 'Create Library' ? 
+          <button type='submit'>{buttonText}</button> : 
+          <button type='submit'>{buttonText}</button>
+        }
       </form>
     );
   }
 }
 
-TodoForm.propTypes = {
+LibraryForm.propTypes = {
   onComplete: PropTypes.func,
-  todo: PropTypes.object,
+  library: PropTypes.object,
+  libraryId: PropTypes.string,
+  buttonText: PropTypes.string,
 };

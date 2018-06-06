@@ -2,6 +2,7 @@
 
 require('dotenv').config();
 
+const { DefinePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssPlugin = require('mini-css-extract-plugin');
 
@@ -19,7 +20,7 @@ webpackConfig.output = {
 
 webpackConfig.plugins = [
   new HtmlWebpackPlugin({
-    title: '401d23 Budget Tracker',
+    title: 'Lab 36-37',
   }),
   new DefinePlugin({
     API_URL: JSON.stringify(process.env.API_URL),

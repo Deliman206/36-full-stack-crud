@@ -1,52 +1,56 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import TodoForm from './../todo-form/todo-form';
-import * as todoActions from '../../actions/todo-actions';
+import LibraryForm from './../library-form/library-form';
+import * as libraryActions from '../../actions/library-actions';
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.todosFetch();
+    this.props.librariesFetch();
   }
 
   render() {
-    const { todos, todoCreate, todoDelete } = this.props;
+    const { libraries, libraryCreate, libraryDelete } = this.props;
+    console.log(this.props);
     return (
       <div>
-        <h2>Todo App</h2>
-        <TodoForm
-          onComplete={todoCreate}
-          buttonText='Create Todo' // may not be neccessary
+        <h2>Library App</h2>
+        <LibraryForm
+          onComplete={libraryCreate}
+          onRemove={libraryDelete}
+          buttonText='Create Library' // may not be neccessary
         />
-        {
-          todos.map((todo) => {
+        { libraries ? 
+          libraries.map((library) => {
             return (
-              <div key={todo.id}>
+              <div key={library.id}>
                 <p></p>
                 <button></button>
-              </div>
+              </div> 
             );
-          })
+          }) : undefined
         }
       </div>
     );
   }
 }
 Dashboard.propTypes = {
-  todosFetch: PropTypes.func,
-
+  libraries: PropTypes.array,
+  libraryCreate: PropTypes.func,
+  librariesFetch: PropTypes.func,
+  libraryDelete: PropTypes.func,
 };
 
 const mapStateTopProps = (state) => {
   return {
-    todos: state.todos,
+    libraries: state.libraries,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  todosFetch: () => dispatch(todoActions.todosFetchRequest()),
-  todosCreate: todo => dispatch(todoActions.todoCreateRequest(todo)),
-  todosDelete: todo => dispatch(todoActions.todoDeleteRequest(todo)),
+  librariesFetch: () => dispatch(libraryActions.librariesFetchRequest()),
+  libraryCreate: library => dispatch(libraryActions.libraryCreateRequest(library)),
+  libraryDelete: library => dispatch(libraryActions.libraryDeleteRequest(library)),
 });
 
 export default connect(mapStateTopProps, mapDispatchToProps)(Dashboard);

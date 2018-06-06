@@ -3,27 +3,27 @@ import PropTypes from 'prop-types';
 import autoBind from './../../utils';
 
 const defaultState = {
-  title: '',
-  error: null,
+  name: '',
+  // error: null,
 };
 
-export default class TodoForm extends React.Component {
+export default class LibraryForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props.todo || defaultState;
-    autoBind.call(this, TodoForm);
+    this.state = this.props.library || defaultState;
+    autoBind.call(this, LibraryForm);
   }
 
   componentDidUpdate(previousProps) {
-    if (previousProps.todo !== this.props.todo) {
-      this.setState(this.props.todo);
+    if (previousProps.library !== this.props.library) {
+      this.setState(this.props.library);
     }
   }
 
   handleChange(event) {
     event.preventDefault();
     const { value } = event.target;
-    this.setState({ title: value });   
+    this.setState({ name: value });   
   }
 
   handleSubmit(event) {
@@ -35,36 +35,36 @@ export default class TodoForm extends React.Component {
       result
         .then(() => {
           this.setState(defaultState);
-        })
-        .catch((error) => {
-          console.error('error', error);
-          this.setState({ error });
         });
+      // .catch((error) => {
+      //   console.error('error', error); // eslint-disable-line
+      //   this.setState({ error });
+      // });
     }
   }
 
   render() {
-    const buttonText = this.props.todo ? 'Update' : 'Create';
+    const buttonText = this.props.library ? 'Update' : 'Create';
     return (
       <form
         onSubmit={this.handleSubmit}
-        className='todo-form'>
+        className='library-form'>
 
         <input
           type='text'
           name='title'
-          placeholder='What todo?'
+          placeholder='+ Library'
           value={this.state.title}
           onChange={this.handleChange}
         />
-        <button type='submit'>{buttonText} todo</button>
+        <button type='submit'>{buttonText} library</button>
 
       </form>
     );
   }
 }
 
-TodoForm.propTypes = {
+LibraryForm.propTypes = {
   onComplete: PropTypes.func,
-  todo: PropTypes.object,
+  library: PropTypes.object,
 };

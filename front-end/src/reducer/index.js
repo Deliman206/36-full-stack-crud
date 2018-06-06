@@ -1,2 +1,4 @@
+import { combineReducers } from 'redux';
+import libraries from './libraries';
 
-export default conbineReducers({ todos });
+export default combineReducers({ libraries });

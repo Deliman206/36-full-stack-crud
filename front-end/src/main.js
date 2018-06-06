@@ -15,4 +15,4 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk, re
 const appContainer = document.createElement('div');
 document.body.appendChild(appContainer);
 
-renderDom(<Provider stroe={store}><App/></Provider>);
+renderDom(<Provider store={store}><App/></Provider>, appContainer);

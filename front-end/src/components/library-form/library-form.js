@@ -4,7 +4,7 @@ import autoBind from './../../utils';
 
 const defaultState = {
   name: '',
-  // error: null,
+  error: null,
 };
 
 export default class LibraryForm extends React.Component {
@@ -22,29 +22,32 @@ export default class LibraryForm extends React.Component {
 
   handleChange(event) {
     event.preventDefault();
+    const { libraryId } = this.props;
     const { value } = event.target;
-    this.setState({ name: value });   
+    this.setState({ name: value }); 
+    if (libraryId) this.setState({ _id: libraryId });  
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const { onComplete } = this.props;
     const result = onComplete(this.state);
+    this.setState(defaultState);
 
     if (result instanceof Promise) {
       result
         .then(() => {
           this.setState(defaultState);
+        })
+        .catch((error) => {
+          console.error('error', error); // eslint-disable-line
+          this.setState({ error });
         });
-      // .catch((error) => {
-      //   console.error('error', error); // eslint-disable-line
-      //   this.setState({ error });
-      // });
     }
   }
 
   render() {
-    const buttonText = this.props.library ? 'Update' : 'Create';
+    const { buttonText } = this.props;
     return (
       <form
         onSubmit={this.handleSubmit}
@@ -57,8 +60,11 @@ export default class LibraryForm extends React.Component {
           value={this.state.title}
           onChange={this.handleChange}
         />
-        <button type='submit'>{buttonText} library</button>
-
+        {
+          this.props.buttonText === 'Create Library' ? 
+          <button type='submit'>{buttonText}</button> : 
+          <button type='submit'>{buttonText}</button>
+        }
       </form>
     );
   }
@@ -67,4 +73,6 @@ export default class LibraryForm extends React.Component {
 LibraryForm.propTypes = {
   onComplete: PropTypes.func,
   library: PropTypes.object,
+  libraryId: PropTypes.string,
+  buttonText: PropTypes.string,
 };

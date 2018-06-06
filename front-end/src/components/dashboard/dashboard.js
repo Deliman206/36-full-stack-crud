@@ -10,22 +10,27 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { libraries, libraryCreate, libraryDelete } = this.props;
-    console.log(this.props);
+    const { 
+      libraries, libraryCreate, libraryDelete, libraryUpdate, 
+    } = this.props;
     return (
       <div>
         <h2>Library App</h2>
         <LibraryForm
           onComplete={libraryCreate}
-          onRemove={libraryDelete}
           buttonText='Create Library' // may not be neccessary
         />
         { libraries ? 
           libraries.map((library) => {
             return (
-              <div key={library.id}>
-                <p></p>
-                <button></button>
+              <div key={library._id}>
+                <p>{library.name}</p>
+                <button onClick={() => libraryDelete(library)}>Delete</button>
+                <LibraryForm 
+                libraryId={library._id}
+                onComplete={libraryUpdate}
+                buttonText='Update Library'
+                />
               </div> 
             );
           }) : undefined
@@ -39,6 +44,7 @@ Dashboard.propTypes = {
   libraryCreate: PropTypes.func,
   librariesFetch: PropTypes.func,
   libraryDelete: PropTypes.func,
+  libraryUpdate: PropTypes.func,
 };
 
 const mapStateTopProps = (state) => {
@@ -51,6 +57,7 @@ const mapDispatchToProps = dispatch => ({
   librariesFetch: () => dispatch(libraryActions.librariesFetchRequest()),
   libraryCreate: library => dispatch(libraryActions.libraryCreateRequest(library)),
   libraryDelete: library => dispatch(libraryActions.libraryDeleteRequest(library)),
+  libraryUpdate: library => dispatch(libraryActions.libraryUpdateRequest(library)),
 });
 
 export default connect(mapStateTopProps, mapDispatchToProps)(Dashboard);

@@ -29,7 +29,6 @@ const librariesFetchRequest = () => (dispatch) => {
 };
 
 const libraryCreateRequest = library => (dispatch) => {
-  console.log(library);
   return superagent.post(`${API_URL}/api/library`)
     .send(library)
     .then((response) => {
@@ -48,7 +47,7 @@ const libraryUpdateRequest = library => (dispatch) => {
 };
 
 const libraryDeleteRequest = library => (dispatch) => {
-  return superagent.delete(`${API_URL}/api/lists/${library._id}`)
+  return superagent.delete(`${API_URL}/api/library/${library._id}`)
     .then((response) => {
       dispatch(libraryDelete(library));
       return response;

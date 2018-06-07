@@ -20,7 +20,7 @@ class AuthForm extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmite(event) {
+  handleSubmit(event) {
     event.preventDefault();
     this.props.onComplete(this.state);
     this.setState(emptyState);

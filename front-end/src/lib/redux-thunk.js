@@ -1,5 +1,6 @@
 export default store => next => action => (
   typeof action === 'function' ?
-    action(store.dispatch, store.getState) :
+    action(store) :
     next(action)
 );
+// .dispatch, store.getState

@@ -20,36 +20,36 @@ const libraryDelete = library => ({
   payload: library,
 });
 
-const librariesFetchRequest = () => (dispatch) => {
+const librariesFetchRequest = () => (store) => {
   return superagent.get(`${API_URL}/api/library`)
     .then((response) => {
-      dispatch(librariesFetch(response.body));
+      store.dispatch(librariesFetch(response.body));
       return response;
     });
 };
 
-const libraryCreateRequest = library => (dispatch) => {
+const libraryCreateRequest = library => (store) => {
   return superagent.post(`${API_URL}/api/library`)
     .send(library)
     .then((response) => {
-      dispatch(libraryCreate(response.body));
+      store.dispatch(libraryCreate(response.body));
       return response;
     });
 };
 
-const libraryUpdateRequest = library => (dispatch) => {
+const libraryUpdateRequest = library => (store) => {
   return superagent.put(`${API_URL}/api/library/${library._id}`)
     .send(library)
     .then((response) => {
-      dispatch(libraryUpdate(response.body));
+      store.dispatch(libraryUpdate(response.body));
       return response;
     });
 };
 
-const libraryDeleteRequest = library => (dispatch) => {
+const libraryDeleteRequest = library => (store) => {
   return superagent.delete(`${API_URL}/api/library/${library._id}`)
     .then((response) => {
-      dispatch(libraryDelete(library));
+      store.dispatch(libraryDelete(library));
       return response;
     });
 };

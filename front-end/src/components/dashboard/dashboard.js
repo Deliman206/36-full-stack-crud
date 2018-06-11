@@ -5,9 +5,9 @@ import LibraryForm from './../library-form/library-form';
 import * as libraryActions from '../../actions/library-actions';
 
 class Dashboard extends React.Component {
-  componentDidMount() {
-    this.props.librariesFetch();
-  }
+  // componentDidMount() {
+  //   this.props.librariesFetch();
+  // }
 
   render() {
     const { 
@@ -15,7 +15,8 @@ class Dashboard extends React.Component {
     } = this.props;
     return (
       <div>
-        <h2>Library App</h2>
+        <p>Only see me if you are logged in</p>
+        {/* <h2>Library App</h2>
         <LibraryForm
           onComplete={libraryCreate}
           buttonText='Create Library' // may not be neccessary
@@ -34,7 +35,7 @@ class Dashboard extends React.Component {
               </div> 
             );
           }) : undefined
-        }
+        } */}
       </div>
     );
   }

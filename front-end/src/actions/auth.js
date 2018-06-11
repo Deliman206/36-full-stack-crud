@@ -12,7 +12,7 @@ export const removeTokenAction = () => ({
 export const signupRequest = user => (store) => {
   return superagent.post(`${API_URL}/signup`)
     .send(user)
-    // .withCredentials()
+    .withCredentials()
     .then((response) => {
       return store.dispatch(setTokenAction(response.text));
     });
@@ -22,7 +22,7 @@ export const signupRequest = user => (store) => {
 export const loginRequest = user => (store) => {
   return superagent.get(`${API_URL}/login`)
     .auth(user.username, user.password)
-    // .withCredentials()
+    .withCredentials()
     .then((response) => {
       return store.dispatch(setTokenAction(response.text));
     });

@@ -25,3 +25,8 @@ export default class App extends React.Component {
     );
   }
 }
+// map state to props
+// map dispatch to props
+// connect
+// Do this because want to know when the user logins in and then put profile into store
+

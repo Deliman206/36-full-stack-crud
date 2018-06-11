@@ -3,4 +3,3 @@ export default store => next => action => (
     action(store) :
     next(action)
 );
-// .dispatch, store.getState

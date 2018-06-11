@@ -35,6 +35,14 @@ const accountSchema = mongoose.Schema({
     type: Date,
     default: () => new Date(),
   },
+  profile: [
+    {
+      type: mongoose.Schema.Types.ObjectId, ref: 'profile',
+    },
+  ],
+}, {
+  usePushEach: true,
+  
 });
 
 // Vinicio - This function is going to be used to login
@@ -50,18 +58,17 @@ function pVerifyPassword(password) {
 }
 
 function pCreateToken() {
-  // Vinicio - `this` is equal to the account object we are working with.
   this.tokenSeed = crypto.randomBytes(TOKEN_SEED_LENGTH).toString('hex');
   return this.save()
     .then((account) => {
-      // Vinicio - at this point, we have a token seed.
-      // Vinicio - sign === encrypt
-      return jsonWebToken.sign(// Vinicio - this line retuns a promise that resolves to a token
+      return jsonWebToken.sign(
         { tokenSeed: account.tokenSeed },
-        process.env.SOUND_CLOUD_SECRET,
-      ); // Vinicio - When this promises resolves, I have a token
+        process.env.SECRET,
+      ); 
+    })
+    .catch(() => {
+      pCreateToken();
     });
-  // Vinicio - TODO: error management
 }
 
 accountSchema.methods.pCreateToken = pCreateToken;

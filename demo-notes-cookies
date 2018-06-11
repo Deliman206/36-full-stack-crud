@@ -1,0 +1,65 @@
+// utils cookie.js
+
+const deleteCookie =(key) => {
+  document.cookie = `${key}=; expires Thu, 01 Jan 1970 00:00:00 GMT`;
+}
+
+const fetchCookie = (key) => {
+  const cookies = document.cookie.split(';');
+
+  for(const cookie of cookies) {
+    const [cookieKey, cookieValue]= cookie.split('=');
+
+    if(key === cookieKe.trim()) {
+      return cookieValue;
+    }
+  }
+  return null;
+};
+
+export {deleteCookie, fetchCookie};
+
+// reducer/token.js
+
+import { fetchCookie } from 'ABOVE'
+
+const token = fetchCookie(TOKEN_COOKIE_KEY)
+const initialState = token  || null;
+
+export default (state = initialState, {})
+
+// component/header.js
+import React from 'react';
+import Proptypes from 'prop-types'
+import * as authActions from 'actions/auth'
+class Header extends React.Component {
+
+}
+
+Header.propTypes = {
+  loggedIn: Proptypes.bool,
+};
+
+const mapStateToProps = state => ({
+  loggedIn: !!state.token,
+});
+
+const mapDispatchToProps = dispatch => ({
+  doLogout: () => dispatch(authActions.logOut)
+})
+
+//------------------------------------------------
+
+import { deleteCookie } from ''
+
+export const logoutAction = () => {
+  // 1. remove cookie
+  // remove token from localStorage
+  // 2. remove token from store
+
+  deleteCookie();
+}
+
+//--------------------------------------------------
+
+export const TOKEN_COOKIE_KEY = '*some token*';

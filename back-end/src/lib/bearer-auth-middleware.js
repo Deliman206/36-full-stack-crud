@@ -20,7 +20,7 @@ export default (request, response, next) => {
 
   if (!token) return next(new HttpError(400, 'AUTH - invalid request'));
 
-  return promisify(jsonWebToken.verify)(token, process.env.SOUND_CLOUD_SECRET)
+  return promisify(jsonWebToken.verify)(token, process.env.SECRET)
     .catch(error => Promise.reject(new HttpError(400, `AUTH- jsonWebTOken Error: ${error}`)))
     .then((decryptedToken) => { // this is a tokenSeed not just decryptedData
       return Account.findOne({ tokenSeed: decryptedToken.tokenSeed });

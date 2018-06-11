@@ -2,24 +2,30 @@
 
 import express from 'express';
 import mongoose from 'mongoose';
-// import cors from 'cors';
+import cors from 'cors';
 import logger from './logger';
 import libraryRoutes from '../route/library-router';
 import errorMiddleWare from './error-middleware';
 import bookRoutes from '../route/book-router';
 import authRoutes from '../route/auth-router';
+import profileRoutes from '../route/profile-router';
 import loggerMiddleware from './logger-middleware';
 
 const app = express();
 let server = null;
 
-// app.use(cors());
+app.use(cors({ 
+  origin: 'http://localhost:8080',
+  credentials: true, 
+}));
 app.use(loggerMiddleware);
 app.use(authRoutes);
+app.use(profileRoutes);
 app.use(libraryRoutes);
 app.use(bookRoutes);
 
 app.all('*', (request, response) => {
+  logger.log(logger.INFO, `bad route: ${response}`);
   logger.log(logger.INFO, 'SERVER: Returning a 404 from the catch-all/default route');
   return response.sendStatus(404);
 });

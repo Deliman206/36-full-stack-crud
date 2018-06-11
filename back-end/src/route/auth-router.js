@@ -29,6 +29,7 @@ authRouter.get('/login', basicAuthMiddleware, (request, response, next) => {
   if (!request.account) {
     return next(new HttpError(400, 'AUTH - invalid request'));
   }
+  delete request.body.password;
   return request.account.pCreateToken()
     .then((token) => {
       logger.log(logger.INFO, 'LOGIN - responding with a 200 status and a Token');

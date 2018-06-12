@@ -14,7 +14,7 @@ const librarySchema = mongoose.Schema({
   },
   founder: {
     type: String,
-    unique: true,
+    // unique: true,
   },
   year: {
     type: Number,

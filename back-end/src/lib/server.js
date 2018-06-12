@@ -13,7 +13,10 @@ import loggerMiddleware from './logger-middleware';
 const app = express();
 let server = null;
 
-// app.use(cors());
+// app.use(cors({
+//   origin: process.env.CORS_ORIGINS.split(' '),
+//   credentials: true,
+// }));
 app.use(loggerMiddleware);
 app.use(authRoutes);
 app.use(libraryRoutes);

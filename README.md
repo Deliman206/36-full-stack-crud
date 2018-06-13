@@ -20,20 +20,30 @@ MONGODB_URI=mongodb://localhost/testing
 SECRET=1234
 ```
 
-The same process will need tp be implemented for the front end however the contents of the ```.env``` file will be the following:
+The same process will need tp be implemented for the front end however the contents of the
+ ```
+ .env
+ ``` 
+ file will be the following:
 
-```API_URL=http://localhost:3000
-NODE_ENV=development```
+```
+API_URL=http://localhost:3000
+NODE_ENV=development
+```
 
 
 ## Tests
 Currently only the back end is testable. This is done using the following commands in the CLI
 
 In one tab: 
-```npm run dbon```
+```
+npm run dbon
+```
 
 And in another tab:
-```npm run test```
+```
+npm run test
+```
 
 This process will validate the routes and logic implemented in the back-end folder.
 
@@ -41,14 +51,21 @@ This process will validate the routes and logic implemented in the back-end fold
 In order to use the application the user must do the following 3 steps:
 
 1. run the database while in the back-end folder:
-```npm run dbon```
+```
+npm run dbon
+```
 
 2. start the server:
-```node index.js```
+```
+node index.js
+```
 
 3. run the application:
 Start by navigating to the front-end folder
-run the following command:  ```npm run watch```
+run the following command:  
+```
+npm run watch
+```
 
 ## License
 

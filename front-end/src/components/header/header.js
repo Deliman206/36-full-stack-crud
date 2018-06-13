@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import * as authActions from '../actions/auth';
+import * as authActions from '../../actions/auth';
 
 class Header extends React.Component {
   render() {

@@ -1,29 +1,53 @@
-![cf](http://i.imgur.com/7v5ASc8.png) 36: Async Actions
-===
+### Documentation
 
-## Submission Instructions
-  * Work in a fork of this repository
-  * Work in a branch on your fork
-	* Enable Travis CI in your repository
-  * Submit a pull request to this repository
-  * Submit a link to your pull request on canvas
-  * Submit a question, observation, and how long you spent on canvas  
+This Project allows the user to interact with a React website that persists data with a back-end database maintained with MongoDB. 
 
-## Requirements  
-#### Feature Tasks 
-  * Create a frontend for your midterm project (Ideally) or lab-14-two-resource-api.
-  * You can also choose to use a comparable RESTful api that does not have auth (must permit full CRUD)
-  * You are only required to create CRUD operations for a single resource of your backend
-  * Use react/redux best practices
-  * Add reporter and thunk middleware to your redux store
-  * make async action creators for making ajax request to your backend
-  * make sync action creators from updating your app store
+## Project title
 
-#### Test
-	* Test your reducers and your components.
+Relational Mapping with React
 
-## Stretch Goals
-  * Create full crud for two resources 
 
-#### Documentation  
-Write a description of the project in your README.md, including detailed instructions for how to build your app. In your frontend README.md add a code block with your frontend .env vars, and in your backend README.md add a code block with your backend .env vars. 
+## Installation
+In order to use this project the user will need to clone the project and install the dependencies. 
+To use the project the user will have to make a file ```.env``` and include the enviroment variables needed for this project to function. Use the following for the back end, note: for this project that is NOT Sluggram:
+
+```NODE_ENV=development
+PORT=3000 
+DEBUG=true
+CORS_ORIGINS=http://localhost:8080 
+MONGODB_URI=mongodb://localhost/testing
+SECRET=1234```
+
+The same process will need tp be implemented for the front end however the contents of the ```.env``` file will be the following:
+
+```API_URL=http://localhost:3000
+NODE_ENV=development```
+
+
+## Tests
+Currently only the back end is testable. This is done using the following commands in the CLI
+
+In one tab: 
+```npm run dbon```
+
+And in another tab:
+```npm run test```
+
+This process will validate the routes and logic implemented in the back-end folder.
+
+## How to use?
+In order to use the application the user must do the following 3 steps:
+
+1. run the database while in the back-end folder:
+```npm run dbon```
+
+2. start the server:
+```node index.js```
+
+3. run the application:
+Start by navigating to the front-end folder
+run the following command:  ```npm run watch```
+
+## License
+
+MIT © [Sean Miller]()

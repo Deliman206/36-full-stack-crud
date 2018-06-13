@@ -1,6 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as userProfileActions from '../../actions/profile';
 
-export default class Dashboard extends React.Component {
+class Dashboard extends React.Component {
+  componentDidMount() {
+    this.props.profileFetch();
+  }
   render() {
     return (
       <div>
@@ -9,3 +15,19 @@ export default class Dashboard extends React.Component {
     );
   }
 }
+
+Dashboard.propTypes = {
+  profileFetch: PropTypes.func,
+};
+
+const mapStateToProps = state => ({
+  profile: state.profile,
+});
+
+const mapDispatchToProps = dispatch => ({
+  profileFetch: profile => dispatch(userProfileActions.getRequest(profile)),
+  profileCreate: profile => dispatch(userProfileActions.createRequest(profile)),
+  profileUpdate: profile => dispatch(userProfileActions.updateRequest(profile)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -7,6 +7,7 @@ class AuthRedirect extends React.Component {
   render() {
     const { location, token } = this.props;
     const { pathname } = location;
+    // const { cookie } = document;
 
     let destinationRoute = null;
     if (pathname === '/login' || pathname === '/signup' || pathname === '/') {
@@ -25,7 +26,7 @@ class AuthRedirect extends React.Component {
 }
 
 AuthRedirect.propTypes = {
-  token: PropTypes.boolean,
+  token: PropTypes.func,
   location: PropTypes.object,
 };
 

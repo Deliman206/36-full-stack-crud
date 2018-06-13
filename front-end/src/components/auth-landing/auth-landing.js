@@ -14,6 +14,12 @@ class AuthLanding extends React.Component {
     autoBind.call(this, AuthLanding);
   }
 
+  componentDidMount() {
+    if (document.cookie) {
+      this.props.cookieToToken(document.cookie);
+    }
+  }
+
   handleLogin(user) {
     return this.props.pDoLogin(user)
       .then(() => {
@@ -67,6 +73,7 @@ class AuthLanding extends React.Component {
 }
 
 AuthLanding.propTypes = {
+  cookieToToken: PropTypes.func,
   pDoLogin: PropTypes.func,
   pDoSignup: PropTypes.func,
   location: PropTypes.object,
@@ -78,6 +85,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  cookieToToken: cookie => dispatch(authActions.setCookieAsToken(cookie)),
   pDoSignup: user => dispatch(authActions.signupRequest(user)),
   pDoLogin: user => dispatch(authActions.loginRequest(user)),
 });

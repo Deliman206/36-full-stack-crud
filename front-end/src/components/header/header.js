@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as authActions from '../../actions/auth';
+// import { fetchCookie } from '../../utils/cookies';
+// import { TOKEN_COOKIE_KEY } from '../../constants'; 
+
+// console.log(!fetchCookie(TOKEN_COOKIE_KEY));
 
 class Header extends React.Component {
   render() {
@@ -42,6 +46,7 @@ Header.propTypes = {
 
 const mapStateToProps = state => ({
   loggedIn: !!state.token,
+  // loggendIn: !fetchCookie(TOKEN_COOKIE_KEY),
 });
 
 

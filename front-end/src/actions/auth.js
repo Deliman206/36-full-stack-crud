@@ -1,10 +1,10 @@
 import superagent from 'superagent';
-import { deleteCookie } from '../utils/cookies';
+import { fetchCookie, deleteCookie } from '../utils/cookies';
 import { TOKEN_COOKIE_KEY } from '../constants';
 
 export const setTokenAction = token => ({
   type: 'TOKEN_SET',
-  payload: !!token,
+  payload: token,
 });
 
 export const removeTokenAction = () => ({
@@ -14,6 +14,11 @@ export const removeTokenAction = () => ({
 export const logout = () => {
   deleteCookie(TOKEN_COOKIE_KEY);
   return removeTokenAction();
+};
+
+export const setCookieAsToken = () => (store) => {
+  const tokenCookie = fetchCookie(TOKEN_COOKIE_KEY);
+  return store.dispatch(setTokenAction(tokenCookie));
 };
 
 export const signupRequest = user => (store) => {

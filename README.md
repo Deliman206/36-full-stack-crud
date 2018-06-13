@@ -1,8 +1,13 @@
-## React with User Login, Token, Cookies and Form Authentication
+## React with User Login, Token, Cookies, Form Authentication and Profile Create/Update Schema
 
 ### Documentation
 
 This Project allows the user to interact with a React website that persists data with Sluggram back-end database maintained with MongoDB. The user can register and have their information stored in the DB so that they can log in at a later point in time. If the user does not submit the correct type of information to the submit form field then error messages will show up. If the user stays logged in with a cookie in their browser the user will remain logged in.
+While the user is logged in they can go to 
+```
+/profile
+```
+and add a Bio to their account. After this is done the user can update this bio and it will persist everytime they log in.
 
 
 ## Installation

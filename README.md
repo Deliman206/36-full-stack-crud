@@ -11,12 +11,14 @@ Relational Mapping with React
 In order to use this project the user will need to clone the project and install the dependencies. 
 To use the project the user will have to make a file ```.env``` and include the enviroment variables needed for this project to function. Use the following for the back end, note: for this project that is NOT Sluggram:
 
-```NODE_ENV=development
+```
+NODE_ENV=development
 PORT=3000 
 DEBUG=true
 CORS_ORIGINS=http://localhost:8080 
 MONGODB_URI=mongodb://localhost/testing
-SECRET=1234```
+SECRET=1234
+```
 
 The same process will need tp be implemented for the front end however the contents of the ```.env``` file will be the following:
 

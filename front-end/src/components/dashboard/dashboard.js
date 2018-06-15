@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import PictureForm from '../picture-form/picture-form';
 import * as userProfileActions from '../../actions/profile';
+import * as userPictureActions from '../../actions/pictures';
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -11,6 +13,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <p>Only see me if you are logged in</p>
+        <PictureForm onComplete={this.props.pictureCreate}/>
       </div>
     );
   }
@@ -18,6 +21,7 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
   profileFetch: PropTypes.func,
+  pictureCreate: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -26,8 +30,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   profileFetch: profile => dispatch(userProfileActions.getRequest(profile)),
-  profileCreate: profile => dispatch(userProfileActions.createRequest(profile)),
-  profileUpdate: profile => dispatch(userProfileActions.updateRequest(profile)),
+  pictureCreate: picture => dispatch(userPictureActions.createRequest(picture)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

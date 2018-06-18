@@ -12,7 +12,7 @@ and add a Bio to their account. After this is done the user can update this bio 
 
 ## Installation
 In order to use this project the user will need to clone the project and install the dependencies. 
-To use the project the user will have to make a file ```.env``` and include the enviroment variables needed for this project to function. Use the following for the back end, note: for this project that IS Sluggram:
+To use the project the user will have to make a file ```.env``` and include the enviroment variables needed for this project to function. Use the following for the back end.
 
 ```
 NODE_ENV=development
